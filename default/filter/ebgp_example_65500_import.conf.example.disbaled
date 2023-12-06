@@ -1,0 +1,11 @@
+filter ebgp_example_65500_import {
+    if ! ebgp_import_upstream(65500) then reject;
+
+    # Add BGP Large Communities
+    bgp_large_community.add((215956,2,65500));
+
+    # Add BGP Communities
+    bgp_community.add((215956,2000));
+
+    accept;
+}
