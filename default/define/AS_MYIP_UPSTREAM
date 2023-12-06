@@ -1,0 +1,5 @@
+# bgpq4 -t4b -l 'define AS_MYIP_UPSTREAM' AS215956:AS-UPSTREAM
+define AS_MYIP_UPSTREAM = [
+    215956,
+    34927
+];
