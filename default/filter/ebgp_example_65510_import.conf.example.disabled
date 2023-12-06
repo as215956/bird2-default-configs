@@ -1,0 +1,9 @@
+filter ebgp_example_65510_import {
+    if ! ebgp_import_peer(65510) then reject;
+
+    # Add IXP Communities
+    bgp_community.add((215956,1036));
+    bgp_large_community.add((215956,1,1036));
+
+    accept;
+}
