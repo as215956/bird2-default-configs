@@ -1,0 +1,17 @@
+# Defines auto generated from scripts
+# bgpq4 -Ab4 -R 24 -m 24 -l 'define AS65520_IPV4' AS65520
+# bgpq4 -Ab6 -R 48 -m 48 -l 'define AS65520_IPV6' AS65520
+
+filter ebgp_example_65520_import {
+    if (net.type = NET_IP4 && ! (net ~ AS65520_IPV4)) then reject;
+    if (net.type = NET_IP6 && ! (net ~ AS65520_IPV6)) then reject;
+    if ! ebgp_import_downstream(65520) then reject;
+
+    # Add BGP Large Communities
+    bgp_large_community.add((215956,3,65520));
+
+    # Add BGP Communities
+    bgp_community.add((215956,3500));
+
+    accept;
+}
